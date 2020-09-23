@@ -1,0 +1,137 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Documentation- ADO Recordset Export Class</title>
+</head>
+
+<body>
+
+<p align="center"><font face="Tahoma" size="4">ADO Recordset Export Class<br>
+by Hussain Mohd. Elius<br>
+<a href="http://www.elvista.cjb.net">www.elvista.cjb.net</a></font></p>
+<p align="justify"><font face="Tahoma" size="4">M</font><font face="Tahoma" size="2">ake 
+your recordset universal! Use this class to export whatever recordset into the 
+industrial standered [csv], commercial standered [html] and the power user 
+standered [Excel]. This is an updated version of my previous work, now complete 
+Events, Properties, Documentation and even more options! Fuly optimized and 
+commented. All bugs fixed. A must have for any database devoloper and a must add 
+to any code library.</font></p>
+<p align="justify"><font face="Tahoma" size="4">L</font><b><font face="Tahoma" size="2">icence 
+Agreement:</font></b></p>
+<p align="justify"><font face="Tahoma" size="2">Redistribution of this code (ADO 
+Recordset Export Class by Hussain Mohd. Elius), whole or in part, as source code 
+or in binary form, alone or as part of a larger distribution or product, is 
+forbidden for any commercial or for profit use without the author's explicit 
+permission. (written or through electronic mail)<br>
+<br>
+Redistribution of this code, as source code or in binary form, with or without 
+modification, is permitted provided that the following conditions are met: <br>
+Redistributions of source code must include this list of conditions, and the 
+following acknowledgment: <br>
+<br>
+The ADO Recordset Export Class Module was developed by Hussain Mohd. Elius. The 
+source code, written in Visual Basic, is freely available for non-commercial, 
+non-profit use at <a href="http://www.elvista.cjb.net">www.elvista.cjb.net</a>
+<br>
+<br>
+Redistributions in binary form, as part of a larger project, must include the 
+above acknowledgment in the end-user documentation. Alternatively, the above 
+acknowledgment may appear in the software itself, if and wherever such 
+third-party acknowledgments normally appear.</font></p>
+<p align="left"><font face="Tahoma" size="4">D</font><b><font face="Tahoma" size="2">OCUMENTATION</font></b></p>
+<p><font face="Tahoma" size="4" color="#FF0000">Declaration</font><br>
+<br>
+In the General Declaration section type:<br>
+Private WithEvents export as DatabaseExport<br>
+<br>
+Then in the Form_Load() Event or in any place but just before the class will be 
+used, type:<br>
+Set export = New DatabaseExport<br>
+<br>
+Now use the Class as you wish. But remember to clear up this reference in the 
+Form_Unload() Event or anyplace after the use of the Class:<br>
+Set export = Nothing<br>
+&nbsp;</p>
+<p><font face="Tahoma" size="4" color="#FF0000">Enumerated Constants (Enums)</font></p>
+<p><b>DatabaseExportEnum</b><br>
+&nbsp;&nbsp;&nbsp; [CSV] = 0<br>
+&nbsp;&nbsp;&nbsp; [HTML] = 1<br>
+&nbsp;&nbsp;&nbsp; [Excel] = 2</p>
+<p><br>
+<font size="4" face="Tahoma" color="#FF0000">The Properties</font><br>
+<br>
+<b>ProgressBar:</b> Bind a progressbar to the class to show the progress of the 
+Export. Remarks: Error is generated if no progressbar is bound.<br>
+<b>ADORecordset:</b> Binds a recordset to the class. This is the class that will 
+be exported.<br>
+<b>FilePath:</b> This is the string to which the file will be exported. Error 
+Remarks: This one is optional for exporting in Excel.<br>
+<br>
+<font color="#FF0000" size="4" face="Tahoma">The Methods</font><b><br>
+</b><br>
+<b>ExportToCSV:</b> Exports the given recordsets to Comma Separated Values or 
+CSV. CSV can be read by almost any Database and Spreadsheet Program.<br>
+<i>Remarks: If you have MSExcel, you can use it to open the CSV file and see the 
+difference between the CSV and the same recordset exported to Excel.</i></p>
+<p><b>ExportToHTML:</b> Exports the given recordset to HTML file so it can 
+easily be uploaded to the<br>
+internet or viewed from the intranet. Many options are in this method to make<br>
+customizability easier.<br>
+<i>Remarks: You can use this Format to any platform, because all computers 
+nowadays have a browser. This will be the best option if you don't know your 
+client.</i><br>
+<br>
+<b>ExportToExcel:</b> Exports the given recordset to Microsoft Excel. Excel 
+provides almost unlimited
+control for the user over the recordset and you s/he can it to easily compute
+or make graphs from the Excel.<br>
+<font face="Fixedsys">Notes on usage</font>: If you do not have Excel 10.0 
+originally used to write the program then simply remove reference from Excel 
+10.0 and select your version. If you do not have Excel at all, then simply do 
+not use the subroutines related to Excel.<br>
+<i>Remarks: To use this method, the user must have MSExcel or Excel.exe An 
+advantage of exporting to Excel is that after this, the user can use Excel to 
+Export to other formats (from Save As.. Menu)</i><br>
+<br>
+<b>OpenRecordset</b>: This method is not related to exporting. However this will 
+open a recordset from a database without much hastel and saves a few keystrokes. 
+The default options used to open the recordset is the fastest and recommended 
+when exporting.<br>
+<i>Remarks: The Query Parameter must start with &quot;WHERE &quot;</i><br>
+<br>
+<b>ShowSave</b>: Use this method and it's options to show a save as... Dialog 
+Box easily. This function is not really required to be used, however it is much 
+easier and reduces coding.<br>
+Returns: True if a file is saved. False if cancelled or if file path is null 
+string.<br>
+<br>
+<font face="Tahoma" size="4" color="#FF0000">The Events</font><br>
+<br>
+<b>Event ExportError (Error As ErrObject)</b><br>
+Raised whenever an error is generated. use it to catch an error. To ignore 
+errors, just type Error.Clear<br>
+<br>
+<b>Event ExportStarted (ByVal ExportingFormat As DatabaseExportEnum)</b><br>
+Raised whenever Exporting Starts. This event is raised first, before any code is 
+executed.<br>
+<br>
+<b>Event ExportComplete (ByVal Success As Boolean, ByVal ExportingFormat As 
+DatabaseExportEnum)</b><br>
+Raised whenever exporting is completed. However, this is not called if an error 
+was NOT ignored. If an error was ignored Success returns False else True.<br>
+&nbsp;</p>
+<hr>
+<p align="center"><i>Please vote for this code. This may not be the best of its 
+kind, but I am just a ninth grader. Your votes and feedback will encorage me to 
+improve and present you with better programs in the years to come.</i></p>
+<hr>
+<p align="center">Documentation by Hussain Mohd. Elius (<a href="http://www.elvista.cjb.net">www.elvista.cjb.net</a>)&nbsp;
+</p>
+
+</body>
+
+</html>
